@@ -1,0 +1,641 @@
+/* === Navigationsleiste und Layout === */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Gwendolyn:wght@400;700&family=Monsieur+La+Doulaise&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Notable&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Dirt&family=Rubik+Wet+Paint&family=Sigmar&display=swap');
+
+/* === Animationsklassen === */
+
+/* Wrapper um Button und Textbox exakt zu überlagern */
+.start-wrapper {
+  position: relative;
+  width: 30%;
+  height: 4rem;
+  margin: 3rem auto;
+}
+
+/* Startbutton mit animierter Breite/Höhe */
+#button-start {
+  width: 90%;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  border-radius: 2.2rem;
+  background-color: #d9d9d9;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/* Textbox erscheint exakt über dem Button */
+#textboxelement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #d9d9d9;
+  border-radius: 2.2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 1s ease-in-out;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+/* Sichtbarkeitsklasse für animiertes Erscheinen */
+#textboxelement.visible {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  pointer-events: auto;
+  width: 100%;
+  height: auto;
+  transition: all 1s ease-in-out;
+}
+
+/* Weiter bestehende Animationen */
+.expand {
+  width: 90% !important;
+  transition: all 1s ease-in-out;
+}
+
+#button-start.expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Verstecke die Textbox initial */
+/* (wird nun durch absolute Positionierung ersetzt) */
+
+/* Einblendeffekt */
+.fade-in {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+/* Initial unsichtbar */
+.text-texbox-fett,
+.herz-icon,
+#fact,
+#button-next {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+/* Sichtbarkeitsklasse */
+.fade-delayed {
+  opacity: 1 !important;
+}
+
+.navigation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.navigation-sites,
+.navigation-language {
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 2.1875rem;
+  background-color: #D9D9D9;
+}
+
+.navigation-sites {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 10rem;
+  height: 4rem;
+  border-radius: 2.1875rem;
+  background-color: #f0f0f0;
+  position: relative;
+  z-index: 1;
+}
+
+.navigation-sites img {
+  position: relative;
+  z-index: 1;
+}
+
+.navigation-active-home{
+
+  background-color: #A0A0A0;
+  width: 5rem;
+  height: 4rem;
+  border-radius: 2.1875rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+
+}
+
+.navigation-active-fav{
+
+  background-color: #A0A0A0;
+  width: 5rem;
+  height: 4rem;
+  border-radius: 2.1875rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+
+}
+
+.navigation-language {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 10rem;
+  height: 4rem;
+  flex-shrink: 0;
+  border-radius: 2.1875rem;
+  background-color: #D9D9D9;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.language-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #A0A0A0; /* dunkleres Grau */
+  border-radius: 2.1875rem;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.navigation-language .navigation-text {
+  z-index: 1;
+  width: 50%;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 4rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+.navigation-language span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.navigation-sites img {
+  height: 2.5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.navigation-text {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.titel {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.untertitel {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin: 0;
+  padding-top: 4rem;
+  padding-bottom: 1.25rem;
+}
+
+.text {
+  padding-top: 0;
+  padding-bottom: 1.25rem;
+  padding-right: 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 200;
+  margin: 0;
+}
+
+.startbildschirm {
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.facts {
+  position: relative;
+  left: 0;
+}
+
+.factbutton {
+  font-family: 'Montserrat', sans-serif;
+  width: 30%;
+  padding: 0.3125rem 1.25rem;
+  margin: 3.125rem 3.125rem 3.125rem 0;
+  background-color: #d9d9d9;
+  border-radius: 2.1875rem;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+  overflow: hidden;
+}
+
+.textbox {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  position: relative;
+  background-color: #D9D9D9;
+  padding: 1.25rem;
+  border-radius: 2.1875rem;
+}
+
+.text-texbox-fett {
+  margin: 0 0.625rem 1.25rem 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.text-fact {
+  margin: 0 1.25rem 1.25rem 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.button-next {
+  align-self: flex-end;
+  margin-top: 2rem;
+  background-color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 2.1875rem;
+  color: white;
+  font-size: 0.875rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.text-button-next-fett {
+  margin: 0;
+  padding: 0.3125rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.textbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.herz-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  height: 3.5rem;
+}
+.herz-icon.filled {
+  color: black;
+}
+
+.text li {
+  margin-bottom: 1.25rem;
+}
+
+/* Masonry Grid Layout mit CSS Columns */
+.masonry-grid {
+  column-count: 3;
+  column-gap: 1rem;
+  list-style: none; /* Aufzählungszeichen entfernen */
+  padding: 0;
+  margin: 0;
+}
+
+/* Einzelne Favoriten-Einträge als Karten */
+.masonry-grid li {
+  background-color: #D9D9D9;
+  padding: 1.25rem;
+  border-radius: 2.1875rem;
+  margin-bottom: 1rem;
+  margin: 0.7rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 200;
+  text-align: justify;
+  hyphens: auto;
+}
+
+
+
+/* Responsiv */
+
+@media (max-width: 768px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+@media (max-width: 500px) {
+  .masonry-grid {
+    column-count: 1;
+  }
+}
+
+/* Zusätzliche Media Queries für Responsiveness FAVORITS */
+
+@media (min-width: 1025px) {
+
+  .navigation-active-fav{ 
+    width: 5rem;
+    height: 4rem;
+    border-radius: 2.1875rem;
+  }
+}
+
+
+/* Tablet (iPad quer & hoch, bis 1024px) */
+@media (max-width: 1024px) {
+  .startbildschirm, .navigation-wrapper {
+    width: 90%;
+  }
+  .navigation-wrapper {
+    justify-content: center;
+  }
+  .titel {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.navigation-active-fav{
+
+    
+  width: 4rem;
+  height: 3.5rem;
+  border-radius: 2.1875rem;
+}
+
+
+/* Handy (bis 600px) */
+@media (max-width: 600px) {
+  .startbildschirm, .navigation-wrapper {
+    width: 100%;
+  }
+  .navigation-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .titel {
+    margin-top: 0;
+    font-size: 8rem;
+    text-align: center;
+    width: 100%;
+    font-size: 3rem;
+  }
+  .navigation-sites {
+    width: 8rem;
+    height: 3.5rem;
+  }
+  .navigation-sites img {
+    height: 2rem;
+  }
+
+  .navigation-active-fav{
+
+    
+    width: 4rem;
+    height: 3.5rem;
+    border-radius: 2.1875rem;
+  }
+  .masonry-grid {
+    column-count: 1;
+    padding: 0 0.5rem;
+  }
+}
+
+
+/* === Media Queries für Responsiveness INDEX === */
+
+/* Tablet: iPads hoch und quer */
+@media (max-width: 1024px) {
+  .startbildschirm,
+  .navigation-wrapper {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .navigation-wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .titel {
+    padding-top: 2rem;
+    font-size: 6rem;
+    text-align: left;
+  }
+
+  .untertitel {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .text {
+    font-size: 1.75rem;
+    text-align: left;
+  }
+
+  #button-start {
+    width: 100%;
+    max-width: 90%;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .textbox {
+    width: 100%;
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .navigation-sites,
+  .navigation-language {
+    width: 8rem;
+    height: 3.5rem;
+  }
+
+
+  .navigation-sites img {
+    height: 2rem;
+  }
+
+  .navigation-text {
+    font-size: 1.25rem;
+  }
+  .navigation-active-home{
+
+    width: 4rem;
+    height: 3.5rem;
+    
+  
+  }
+  
+
+
+}
+
+/* Smartphone: iPhone-Größen bis 600px */
+@media (max-width: 600px) {
+  .startbildschirm,
+  .navigation-wrapper {
+    width: 100%;
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .navigation-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .titel {
+    font-size: 2.25rem;
+    text-align: left;
+  }
+
+  .untertitel {
+    padding-top: 2rem;
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .text {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  #button-start {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem 0;
+    text-align: left;
+  }
+
+  .factbutton {
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  .textbox {
+    width: 100%;
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .text-texbox-fett,
+  .text-fact {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .button-next {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .text-button-next-fett {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .navigation-sites,
+  .navigation-language {
+    width: 8rem;
+    height: 3rem;
+
+  }
+
+  .navigation-sites img {
+    height: 1.5rem;
+  }
+
+  .navigation-text {
+    font-size: 1rem;
+  }
+
+  .navigation-active-home{
+
+    background-color: #A0A0A0;
+    width: 4rem;
+    height: 3rem;
+    border-radius: 2.1875rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .navigation-active-fav{
+
+    background-color: #A0A0A0;
+    width: 4rem;
+    height: 3rem;
+    border-radius: 2.1875rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+  }
+
+  .herz-icon {
+    height: 2.5rem;
+  }
+
+  .masonry-grid {
+    column-count: 1;
+  }
+
+  /* Einzelne Favoriten-Einträge als Karten */
+.masonry-grid li {
+  background-color: #D9D9D9;
+  border-radius: 2.1875rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 200;
+  text-align: justify;
+  hyphens: auto;
+}
+
+}
